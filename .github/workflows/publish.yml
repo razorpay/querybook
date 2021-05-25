@@ -11,8 +11,7 @@ jobs:
       - name: Publish to Dockerhub
         uses: docker/build-push-action@v1
         with:
-          dockerfile: warehouse/Dockerfile
           repository: razorpay/querybook
-          username: ${{ secrets.DOCKERHUB_PUBLIC_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PUBLIC_PASSWORD }}
+          username: ${{ secrets.PUBLIC_DOCKER_USERNAME }}
+          password: ${{ secrets.PUBLIC_DOCKER_PASSWORD }}
           tags: latest
