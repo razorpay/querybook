@@ -12,6 +12,6 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           repository: razorpay/querybook
-          username: ${{ secrets.PUBLIC_DOCKERHUB_USERNAME }}
-          password: ${{ secrets.PUBLIC_DOCKERHUB_PASSWORD }}
+          username: ${{ secrets.PUBLIC_DOCKER_USERNAME }}
+          password: ${{ secrets.PUBLIC_DOCKER_PASSWORD }}
           tags: latest
