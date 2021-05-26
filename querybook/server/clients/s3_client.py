@@ -1,5 +1,6 @@
 import boto3
 import botocore
+from botocore.client import Config
 
 from env import QuerybookSettings
 from lib.utils.utf8 import split_by_last_invalid_utf8_char
@@ -74,7 +75,8 @@ class MultiPartUploader(object):
 class S3KeySigner(object):
     def __init__(self, bucket_name):
         self._bucket_name = bucket_name
-        self._s3 = boto3.client("s3")
+        self._s3 = boto3.client(
+            "s3", "ap-south-1", config=Config(signature_version='s3v4'))
         self._bucket = boto3.resource("s3").Bucket(bucket_name)
 
     def generate_presigned_url(
