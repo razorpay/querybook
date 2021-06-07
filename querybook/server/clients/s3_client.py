@@ -76,7 +76,8 @@ class S3KeySigner(object):
     def __init__(self, bucket_name):
         self._bucket_name = bucket_name
         self._s3 = boto3.client(
-            "s3", "ap-south-1", config=Config(signature_version='s3v4'))
+            "s3", "ap-south-1", config=Config(signature_version="s3v4")
+        )
         self._bucket = boto3.resource("s3").Bucket(bucket_name)
 
     def generate_presigned_url(
