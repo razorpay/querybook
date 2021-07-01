@@ -21,7 +21,7 @@ import { sendConfirm, setBrowserTitle } from 'lib/querybookUI';
 import { scrollToCell, getShareUrl } from 'lib/data-doc/data-doc-utils';
 import { sanitizeUrlTitle, copy } from 'lib/utils';
 import { getQueryString } from 'lib/utils/query-string';
-import { matchKeyPress } from 'lib/utils/keyboard';
+import { matchKeyMap, KeyMap } from 'lib/utils/keyboard';
 import {
     deserializeCopyCommand,
     serializeCopyCommand,
@@ -500,7 +500,7 @@ class DataDocComponent extends React.PureComponent<IProps, IState> {
 
         const repeat = event.repeat;
 
-        if (matchKeyPress(event, 'Cmd-S') && !repeat) {
+        if (matchKeyMap(event, KeyMap.dataDoc.saveDataDoc) && !repeat) {
             stopEvent = true;
             this.props.forceSaveDataDoc(this.props.docId);
         }
@@ -747,7 +747,10 @@ class DataDocComponent extends React.PureComponent<IProps, IState> {
             }
         }
 
-        if (this.props.dataDoc?.title !== prevProps.dataDoc?.title) {
+        if (
+            this.props.dataDoc?.title !== prevProps.dataDoc?.title &&
+            this.props.dataDoc?.title != null
+        ) {
             this.publishDataDocTitle(this.props.dataDoc.title);
         }
     }
