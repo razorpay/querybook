@@ -41,7 +41,7 @@ def _get_executor_params_and_engine(query_execution_id, celery_task, session=Non
             "statement_ranges": statement_ranges,
             "client_setting": {
                 **engine.get_engine_params(),
-                "proxy_user": user.username,
+                "proxy_user": user.email,
             },
         },
         engine,
