@@ -3303,10 +3303,10 @@
   dependencies:
     moment "^2.10.2"
 
-"@types/codemirror@^0.0.76":
-  version "0.0.76"
-  resolved "https://registry.yarnpkg.com/@types/codemirror/-/codemirror-0.0.76.tgz#c52719878056a216bc05889b46a41d4eb1434423"
-  integrity sha512-k/hpUb+Ebyn9z63qM8IbsRiW0eYHZ+pi/1e2reGzBKAZJzkjWmNTXXqLLiNv5d9ekyxkajxRBr5Hu2WZq/nokw==
+"@types/codemirror@^5.60.1":
+  version "5.60.1"
+  resolved "https://registry.yarnpkg.com/@types/codemirror/-/codemirror-5.60.1.tgz#726dd754756f9ea8094a9411c59de00052a5b89c"
+  integrity sha512-yV14LQ5VvghnW0uSuCw2bEfZC6NvxHQEckl2w3dEk5l0yPGzQh14dCaWvG5KD/2l3cgFSifR+6nIUD7LDLdUTg==
   dependencies:
     "@types/tern" "*"
 
