@@ -114,7 +114,7 @@
         "@storybook/builder-webpack5": "^6.3.1",
         "@storybook/manager-webpack5": "^6.3.1",
         "@storybook/react": "^6.3.1",
-        "@types/chart.js": "2.9.21",
+        "@types/chart.js": "2.9.32",
         "@types/codemirror": "^0.0.76",
         "@types/d3": "^5.0.1",
         "@types/dagre-d3": "0.4.38",
