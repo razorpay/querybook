@@ -1,36 +1,9 @@
 version: 2
-registries:
-  docker-registry-registry-hub-docker-com:
-    type: docker-registry
-    url: https://registry.hub.docker.com
-    username: rzpdependabot
-    password: "${{secrets.DOCKER_REGISTRY_REGISTRY_HUB_DOCKER_COM_PASSWORD}}"
-  docker-registry-c-rzp-io:
-    type: docker-registry
-    url: https://c.rzp.io
-    username: kranti.deep@razorpay.com
-    password: "${{secrets.DOCKER_REGISTRY_C_RZP_IO_PASSWORD}}"
-
 updates:
 - package-ecosystem: npm
   directory: "/"
   schedule:
-    interval: weekly
+    interval: daily
     day: saturday
     time: "04:00"
     timezone: Asia/Calcutta
-  labels:
-      - "dependencies"
-  open-pull-requests-limit: 99
-- package-ecosystem: docker
-  directory: "/"
-  schedule:
-    interval: weekly
-    day: saturday
-    time: "04:00"
-    timezone: Asia/Calcutta
-  labels:
-      - "dependencies"
-  registries:
-  - docker-registry-registry-hub-docker-com
-  - docker-registry-c-rzp-io
