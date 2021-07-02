@@ -117,7 +117,7 @@
         "@types/chart.js": "2.9.21",
         "@types/codemirror": "^0.0.76",
         "@types/d3": "^5.0.1",
-        "@types/dagre-d3": "0.4.38",
+        "@types/dagre-d3": "0.6.2",
         "@types/draft-js": "0.10.44",
         "@types/fast-json-stable-stringify": "2.0.0",
         "@types/feather-icons": "4.7.0",
