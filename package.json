@@ -108,7 +108,7 @@
         "@babel/plugin-proposal-optional-chaining": "^7.12.7",
         "@hot-loader/react-dom": "^16.11.0",
         "@storybook/addon-centered": "^5.3.21",
-        "@storybook/addon-essentials": "^6.3.1",
+        "@storybook/addon-essentials": "^6.3.4",
         "@storybook/addon-links": "^6.3.1",
         "@storybook/addons": "^6.3.1",
         "@storybook/builder-webpack5": "^6.3.1",
