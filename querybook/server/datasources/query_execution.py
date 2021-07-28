@@ -1,11 +1,7 @@
 from typing import Dict
 
-from flask import (
-    abort,
-    Response,
-)
+from flask import abort, Response, redirect
 from flask_login import current_user
-import requests
 
 from app.flask_app import socketio
 from app.datasource import register, api_assert, RequestException
@@ -201,27 +197,24 @@ def download_statement_execution_result(statement_execution_id):
             statement_execution.query_execution_id, session=session
         )
 
+        download_file_name = f"result_{statement_execution.query_execution_id}_{statement_execution_id}.csv"
+
         reader = GenericReader(statement_execution.result_path)
         response = None
         if reader.has_download_url:
             # If the Reader can generate a download,
-            # we proxy download the file
-            download_url = reader.get_download_url()
-            req = requests.get(download_url, stream=True)
-
-            # 10 KB size
-            response = Response(req.iter_content(chunk_size=10 * 1024))
+            # we let user download the file by redirection
+            download_url = reader.get_download_url(custom_name=download_file_name)
+            response = redirect(download_url)
         else:
             # We read the raw file and download it for the user
             reader.start()
             raw = reader.read_raw()
             response = Response(raw)
-        response.headers["Content-Type"] = "text/plain"
-        response.headers[
-            "Content-Disposition"
-        ] = 'attachment; filename="result_{}_{}.csv"'.format(
-            statement_execution.query_execution_id, statement_execution_id
-        )
+            response.headers["Content-Type"] = "text/csv"
+            response.headers[
+                "Content-Disposition"
+            ] = f'attachment; filename="{download_file_name}"'
         return response
 
 

@@ -16,6 +16,10 @@ export type PickType<T, F> = Pick<
 export type WithOptional<T, K extends keyof T> = Omit<T, K> &
     Partial<Pick<T, K>>;
 
-export type DropFirst<T extends unknown[]> = T extends [any, ...(infer U)]
+export type DropFirst<T extends unknown[]> = T extends [any, ...infer U]
     ? U
     : never;
+
+export type DeepPartial<T> = {
+    [P in keyof T]?: DeepPartial<T[P]>;
+};

@@ -5,7 +5,6 @@ import { Field, withFormik, FormikProps } from 'formik';
 import produce from 'immer';
 import { isEmpty, range } from 'lodash';
 import Select from 'react-select';
-import ChartComponent, { ChartComponentProps } from 'react-chartjs-2';
 
 import { IStoreState } from 'redux/store/types';
 import { IDataChartCellMeta } from 'const/datadoc';
@@ -19,9 +18,10 @@ import {
     aggTypes,
     IChartAxisMeta,
     ChartScaleType,
-    chartValueDisplayType,
+    ChartValueDisplayType,
     ChartScaleOptions,
     chartTypeToAllowedAxisType,
+    ChartSize,
 } from 'const/dataDocChart';
 import { colorPalette, colorPaletteNames } from 'const/chartColors';
 
@@ -37,7 +37,6 @@ import { queryCellSelector } from 'redux/dataDoc/selector';
 
 import { SoftButton } from 'ui/Button/Button';
 import { IconButton } from 'ui/Button/IconButton';
-import { ErrorBoundary } from 'ui/ErrorBoundary/ErrorBoundary';
 import { FormField, FormSectionHeader } from 'ui/Form/FormField';
 import { Tabs } from 'ui/Tabs/Tabs';
 
@@ -92,16 +91,6 @@ const DataDocChartComposerComponent: React.FunctionComponent<
     const [displayStatementId, setDisplayStatementId] = React.useState(
         undefined
     );
-
-    const chartJSRef = React.useRef<ChartComponent<ChartComponentProps>>(null);
-
-    // making sure legend color updated for bar/horiz bar/bubble charts
-    React.useEffect(() => {
-        if (chartJSRef.current) {
-            const chart = chartJSRef.current.chartInstance;
-            chart.update();
-        }
-    }, [values.coloredSeries]);
 
     const {
         statementResultData,
@@ -281,15 +270,7 @@ const DataDocChartComposerComponent: React.FunctionComponent<
             }));
             return options;
         },
-        [
-            chartData,
-            statementResultData,
-            values.xIndex,
-            values.hiddenSeries,
-            values.coloredSeries,
-            values.aggregate,
-            values.switch,
-        ]
+        [chartData, values.xIndex, values.hiddenSeries, values.coloredSeries]
     );
 
     const getAxesScaleType = React.useCallback(
@@ -323,7 +304,7 @@ const DataDocChartComposerComponent: React.FunctionComponent<
     ) => {
         const hiddenSeries = [];
         const selectedSeries = selectedVals.map((obj) => obj.value);
-        for (let i = 0; i < statementResultData[0].length; i++) {
+        for (let i = 0; i < chartData[0].length; i++) {
             if (i !== values.xIndex && !selectedSeries.includes(i)) {
                 hiddenSeries.push(i);
             }
@@ -662,6 +643,7 @@ const DataDocChartComposerComponent: React.FunctionComponent<
                 options={xAxisOptions}
                 name="sortIndex"
                 label="Sort Index"
+                withDeselect
                 onChange={(val) => {
                     setFieldValue('sortIndex', val);
                     if (val != null) {
@@ -745,6 +727,31 @@ const DataDocChartComposerComponent: React.FunctionComponent<
                         />
                     </>
                 )}
+                <SimpleField
+                    stacked
+                    label="Chart Height"
+                    name="size"
+                    type="react-select"
+                    help="If set from not auto to auto height, refresh the page to see change."
+                    options={[
+                        {
+                            value: ChartSize.SMALL,
+                            label: 'Small (1/3 height)',
+                        },
+                        {
+                            value: ChartSize.MEDIUM,
+                            label: 'Medium (1/2 height)',
+                        },
+                        {
+                            value: ChartSize.LARGE,
+                            label: 'Large (full height)',
+                        },
+                        {
+                            value: ChartSize.AUTO,
+                            label: 'Auto height',
+                        },
+                    ]}
+                />
                 <FormSectionHeader>Legend</FormSectionHeader>
                 <SimpleField
                     label="Visible"
@@ -767,15 +774,15 @@ const DataDocChartComposerComponent: React.FunctionComponent<
                     type="react-select"
                     options={[
                         {
-                            value: chartValueDisplayType.FALSE,
+                            value: ChartValueDisplayType.FALSE,
                             label: 'Hide Values',
                         },
                         {
-                            value: chartValueDisplayType.TRUE,
+                            value: ChartValueDisplayType.TRUE,
                             label: 'Show Values',
                         },
                         {
-                            value: chartValueDisplayType.AUTO,
+                            value: ChartValueDisplayType.AUTO,
                             label: 'Show Values without Overlap',
                         },
                     ]}
@@ -940,7 +947,6 @@ const DataDocChartComposerComponent: React.FunctionComponent<
                 data={chartData}
                 meta={formValsToMeta(values, meta)}
                 chartJSOptions={{ maintainAspectRatio: false }}
-                chartJSRef={chartJSRef}
             />
         );
 
@@ -949,7 +955,7 @@ const DataDocChartComposerComponent: React.FunctionComponent<
             <div className="DataDocChartComposer-chart">
                 {renderPickerDOM()}
                 <div className="DataDocChartComposer-chart-sizer">
-                    <ErrorBoundary>{chartData ? chartDOM : null}</ErrorBoundary>
+                    {chartData ? chartDOM : null}
                 </div>
             </div>
             {tableDOM}
@@ -1071,9 +1077,10 @@ function formValsToMeta(vals: IChartFormValues, meta: IDataChartCellMeta) {
         draft.visual.legend_position = vals.legendPosition;
         draft.visual.legend_display = vals.legendDisplay;
         draft.visual.connect_missing = vals.connectMissing;
+        draft.visual.size = vals.size;
 
         draft.visual.values = {
-            display: vals.valueDisplay ?? chartValueDisplayType.FALSE,
+            display: vals.valueDisplay ?? ChartValueDisplayType.FALSE,
             position: vals.valuePosition,
             alignment: vals.valueAlignment,
         };

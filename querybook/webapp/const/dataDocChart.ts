@@ -69,10 +69,9 @@ export const ChartScaleOptions: ChartScaleType[] = [
     'linear',
     'logarithmic',
 ];
-export const chartTypeToAllowedAxisType: Partial<Record<
-    ChartType,
-    { x: ChartScaleType[]; y: ChartScaleType[] }
->> = {
+export const chartTypeToAllowedAxisType: Partial<
+    Record<ChartType, { x: ChartScaleType[]; y: ChartScaleType[] }>
+> = {
     line: {
         x: ChartScaleOptions,
         y: ['linear', 'logarithmic'],
@@ -151,19 +150,27 @@ export interface IChartChartMeta {
 
 export type ChartLegendPositionType = 'top' | 'bottom' | 'right' | 'left';
 
-export enum chartValueDisplayType {
+export enum ChartValueDisplayType {
     FALSE = 0,
     TRUE,
     AUTO,
+}
+
+export enum ChartSize {
+    SMALL = 'sm',
+    MEDIUM = 'md',
+    LARGE = 'lg',
+    AUTO = 'auto',
 }
 
 export interface IChartVisualMeta {
     legend_position?: ChartLegendPositionType;
     legend_display?: boolean;
     connect_missing?: boolean;
+    size?: ChartSize;
 
     values: {
-        display: chartValueDisplayType;
+        display: ChartValueDisplayType;
         position: 'center' | 'start' | 'end';
         alignment:
             | 'center'
@@ -232,8 +239,9 @@ export interface IChartFormValues {
     legendPosition: 'top' | 'bottom' | 'right' | 'left';
     legendDisplay: boolean;
     connectMissing: boolean;
+    size: ChartSize;
 
-    valueDisplay: chartValueDisplayType;
+    valueDisplay: ChartValueDisplayType;
     valuePosition: 'center' | 'start' | 'end';
     valueAlignment:
         | 'center'

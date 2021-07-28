@@ -1,35 +1,31 @@
-import ChartComponent, {
-    Line,
-    Bar,
-    HorizontalBar,
-    Pie,
-    Scatter,
-    Doughnut,
-    Bubble,
-    defaults,
-    ChartComponentProps,
-} from 'react-chartjs-2';
+import { Line, Bar, Pie, Scatter, Doughnut, Bubble } from 'react-chartjs-2';
 import React, { MutableRefObject, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import Chart, { ChartOptions } from 'chart.js';
+import { Chart, ChartOptions } from 'chart.js';
+import 'chartjs-adapter-moment';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 import { IDataChartCellMeta } from 'const/datadoc';
-import { ChartScaleType, chartTypeToAllowedAxisType } from 'const/dataDocChart';
+import {
+    ChartScaleType,
+    ChartSize,
+    chartTypeToAllowedAxisType,
+} from 'const/dataDocChart';
 import { fontColor } from 'const/chartColors';
 import { mapMetaToChartOptions } from 'lib/chart/chart-meta-processing';
 import { getDefaultScaleType } from 'lib/chart/chart-utils';
 import { processChartJSData } from 'lib/chart/chart-data-processing';
 import { IStoreState } from 'redux/store/types';
+import { DataDocChartWrapper } from './DataDocChartWrapper';
 
 interface IDataDocChartProps {
     meta: IDataChartCellMeta;
     data?: any[][];
     chartJSOptions?: ChartOptions;
-    chartJSRef?: MutableRefObject<ChartComponent<ChartComponentProps>>;
+    chartJSRef?: MutableRefObject<Chart>;
 }
 
-Chart.plugins.unregister(ChartDataLabels);
+Chart.registry.remove(ChartDataLabels);
 
 function isChartValNull(val: any): boolean {
     // checks if chart value is null or "null"
@@ -118,14 +114,19 @@ export const DataDocChart: React.FunctionComponent<IDataDocChartProps> = ({
     );
 
     React.useEffect(() => {
-        defaults.global.defaultFontColor = `rgb(
-                ${fontColor[theme][0]},
-                ${fontColor[theme][1]},
-                ${fontColor[theme][2]}
-                )`;
-        defaults.global.defaultFontFamily = 'Avenir Next';
-        defaults.global.defaultFontSize = 14;
-        defaults.global.plugins.filler.propagate = true;
+        Chart.defaults.color = `rgb(
+            ${fontColor[theme][0]},
+            ${fontColor[theme][1]},
+            ${fontColor[theme][2]}
+        )`;
+        Chart.defaults.font = {
+            family: 'Avenir Next',
+            size: 14,
+            style: 'normal',
+            weight: undefined,
+            lineHeight: 1.2,
+        };
+        Chart.defaults.plugins.filler.propagate = true;
     }, [theme]);
 
     const [xAxesScaleType, yAxesScaleType] = useChartScale(meta, data);
@@ -155,14 +156,11 @@ export const DataDocChart: React.FunctionComponent<IDataDocChartProps> = ({
         options: combinedChartJSOptions,
         ref: chartJSRef,
     };
-
     let chartDOM = null;
     if (meta.chart.type === 'line' || meta.chart.type === 'area') {
         chartDOM = <Line {...chartProps} />;
-    } else if (meta.chart.type === 'bar') {
+    } else if (meta.chart.type === 'bar' || meta.chart.type === 'histogram') {
         chartDOM = <Bar {...chartProps} />;
-    } else if (meta.chart.type === 'histogram') {
-        chartDOM = <HorizontalBar {...chartProps} />;
     } else if (meta.chart.type === 'pie') {
         chartDOM = <Pie {...chartProps} />;
     } else if (meta.chart.type === 'doughnut') {
@@ -173,5 +171,9 @@ export const DataDocChart: React.FunctionComponent<IDataDocChartProps> = ({
         chartDOM = <Bubble {...chartProps} />;
     }
 
-    return chartDOM;
+    return (
+        <DataDocChartWrapper size={meta.visual.size}>
+            {chartDOM}
+        </DataDocChartWrapper>
+    );
 };
