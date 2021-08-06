@@ -68,7 +68,7 @@
         "mini-css-extract-plugin": "2.1.0",
         "moment": "2.24.0",
         "node-sass": "6.0.1",
-        "normalizr": "3.3.0",
+        "normalizr": "3.6.1",
         "qs": "6.5.2",
         "rc-time-picker": "3.6.4",
         "re-resizable": "4.9.0",
