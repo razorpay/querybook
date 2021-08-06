@@ -26,7 +26,7 @@ import {
     deserializeCopyCommand,
     serializeCopyCommand,
 } from 'lib/data-doc/copy';
-import { isAxiosError } from 'lib/utils/error';
+import { formatError, isAxiosError } from 'lib/utils/error';
 import { searchDataDocCells, replaceDataDoc } from 'lib/data-doc/search';
 
 import {
@@ -316,7 +316,7 @@ class DataDocComponent extends React.PureComponent<IProps, IState> {
                 );
             }
         } catch (e) {
-            toast.error(`Insert cell failed, reason: ${e}`);
+            toast.error(`Insert cell failed, reason: ${formatError(e)}`);
         }
     }
 
@@ -352,7 +352,7 @@ class DataDocComponent extends React.PureComponent<IProps, IState> {
                 copy('');
                 toast.success('Pasted');
             } catch (e) {
-                toast.error('Failed to paste, reason: ' + String(e));
+                toast.error('Failed to paste, reason: ' + formatError(e));
             }
         } else {
             toast.error('Nothing to paste, skipping.');
@@ -498,11 +498,25 @@ class DataDocComponent extends React.PureComponent<IProps, IState> {
     public onKeyDown(event: KeyboardEvent) {
         let stopEvent = false;
 
-        const repeat = event.repeat;
+        if (event.repeat) {
+            return;
+        }
 
-        if (matchKeyMap(event, KeyMap.dataDoc.saveDataDoc) && !repeat) {
+        if (matchKeyMap(event, KeyMap.dataDoc.saveDataDoc)) {
             stopEvent = true;
             this.props.forceSaveDataDoc(this.props.docId);
+        } else if (matchKeyMap(event, KeyMap.dataDoc.copyCell)) {
+            const { focusedCellIndex } = this.state;
+            if (focusedCellIndex != null) {
+                stopEvent = true;
+                this.copyCellAt(this.state.focusedCellIndex, false);
+            }
+        } else if (matchKeyMap(event, KeyMap.dataDoc.pasteCell)) {
+            const { focusedCellIndex } = this.state;
+            if (focusedCellIndex != null) {
+                stopEvent = true;
+                this.pasteCellAt(this.state.focusedCellIndex);
+            }
         }
 
         if (stopEvent) {
@@ -858,7 +872,7 @@ function mapDispatchToProps(dispatch: Dispatch) {
                     )
                 );
             } catch (e) {
-                toast.error(`Cannot update cell, reason: ${e}`);
+                toast.error(`Cannot update cell, reason: ${formatError(e)}`);
             }
         },
     };

@@ -1,3 +1,4 @@
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
@@ -87,7 +88,6 @@ module.exports = (env, options) => {
     const mode = PROD ? 'production' : 'development';
 
     const entry = {
-        react_hot_loader: 'react-hot-loader/patch',
         react_app: './querybook/webapp/index.tsx',
     };
 
@@ -124,7 +124,6 @@ module.exports = (env, options) => {
         mode,
 
         devServer,
-
         output: {
             filename: '[name].[fullhash].js',
             path: OUTPUT_PATH,
@@ -144,11 +143,6 @@ module.exports = (env, options) => {
             ],
             alias: {
                 config: path.resolve(__dirname, './querybook/config/'),
-                ...(PROD
-                    ? {}
-                    : {
-                          'react-dom': '@hot-loader/react-dom',
-                      }),
             },
         },
 
@@ -230,20 +224,19 @@ module.exports = (env, options) => {
             }),
             new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
             new MiniCssExtractPlugin({
-                filename: '[name].[contenthash:4].css',
+                filename: '[name].[contenthash].css',
             }),
             new HtmlWebpackPlugin({
                 title: appName,
                 template: './querybook/webapp/index.html',
-                chunks: ['react_hot_loader']
-                    .concat(entry.custom ? ['custom'] : [])
-                    .concat(['react_app']),
+                chunks: (entry.custom ? ['custom'] : []).concat(['react_app']),
                 chunksSortMode: 'manual',
             }),
             new webpack.SourceMapDevToolPlugin({
                 filename: '[file].map[query]',
                 exclude: [/vendor/],
             }),
-        ],
+            !PROD && new ReactRefreshWebpackPlugin(),
+        ].filter(Boolean),
     };
 };

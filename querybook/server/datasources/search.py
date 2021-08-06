@@ -1,4 +1,3 @@
-import re
 import json
 from flask_login import current_user
 
@@ -144,8 +143,8 @@ def _match_table_fields(fields):
     for field in fields:
         # 'table_name', 'description', and 'column' are fields used by Table search
         if field == "table_name":
-            search_fields.append("full_name^10")
-            search_fields.append("full_name_ngram^15")
+            search_fields.append("full_name^15")
+            search_fields.append("full_name_ngram")
         elif field == "description":
             search_fields.append("description")
         elif field == "column":
@@ -172,14 +171,15 @@ def _construct_tables_query(
     keywords, filters, fields, limit, offset, concise, sort_key=None, sort_order=None,
 ):
 
-    search_fields = _match_table_fields(fields)
-
     search_query = {}
     if keywords:
+        search_fields = _match_table_fields(fields)
         search_query["multi_match"] = {
             "query": keywords,
             "fields": search_fields,
             "minimum_should_match": "100%",
+            "type": "phrase",
+            "operator": "and",
         }
     else:
         search_query["match_all"] = {}
@@ -213,7 +213,7 @@ def _construct_tables_query(
     }
 
     if concise:
-        query["_source"] = ["id", "schema", "name"]
+        query["_source"] = ["id", "full_name"]
 
     if sort_key:
         if not isinstance(sort_key, list):
@@ -281,9 +281,7 @@ def search_datadoc(
 ):
     verify_environment_permission([environment_id])
     filters.append(["environment_id", environment_id])
-    # Unfortuantely currently we can't search including underscore,
-    # so split. # TODO: Allow for both.
-    # parsed_keywords = map(lambda x: re.split('(-|_)', x), keywords)
+
     query = _construct_datadoc_query(
         keywords=keywords,
         filters=filters,
@@ -316,11 +314,9 @@ def search_tables(
 ):
     verify_metastore_permission(metastore_id)
     filters.append(["metastore_id", metastore_id])
-    # Unfortuantely currently we can't search including underscore,
-    # so split. # TODO: Allow for both.
-    parsed_keywords = " ".join(re.split("-|_|\\.", keywords))
+
     query = _construct_tables_query(
-        keywords=parsed_keywords,
+        keywords=keywords,
         filters=filters,
         fields=fields,
         limit=limit,
@@ -341,9 +337,7 @@ def search_tables(
 @register("/suggest/<int:metastore_id>/tables/", methods=["GET"])
 def suggest_tables(metastore_id, prefix, limit=10):
     verify_metastore_permission(metastore_id)
-    # Unfortuantely currently we can't search including underscore,
-    # so split. # TODO: Allow for both.
-    # parsed_keywords = map(lambda x: re.split('(-|_)', x), keywords)
+
     query = {
         "suggest": {
             "suggest": {
@@ -362,7 +356,6 @@ def suggest_tables(metastore_id, prefix, limit=10):
 
     result = None
     try:
-        # print '\n--ES latest hosted_index %s\n' % hosted_index
         result = get_hosted_es().search(index_name, type_name, body=query)
     except Exception as e:
         LOG.info(e)

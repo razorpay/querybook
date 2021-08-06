@@ -21,8 +21,26 @@ const specialKeyChecker: Record<string, (e: AllKeyboardEvent) => boolean> = {
     DOWN: (event: AllKeyboardEvent) => event.keyCode === 40,
 };
 
+const SpecialKeyToSymbol = {
+    OSX: {
+        CMD: '⌘',
+        ALT: '⌥',
+        ENTER: '⏎',
+        SHIFT: '⇧',
+        UP: '↑',
+        DOWN: '↓',
+    },
+    Windows: {
+        CMD: 'Ctrl',
+        ENTER: '⏎',
+        SHIFT: '⇧',
+        UP: '↑',
+        DOWN: '↓',
+    },
+};
+
 export function matchKeyPress(
-    event: AllKeyboardEvent | React.KeyboardEvent,
+    event: AllKeyboardEvent,
     ...keyStrings: string[]
 ): boolean {
     // This function aims to simulate codemirror's key map functionality
@@ -52,6 +70,19 @@ export function matchKeyMap(
     keyMap: { key: string; name: string }
 ) {
     return matchKeyPress(event, keyMap.key);
+}
+
+export function getKeySymbol(key: string) {
+    const upperKey = key.toUpperCase();
+    const specialKeyMap = isOSX
+        ? SpecialKeyToSymbol.OSX
+        : SpecialKeyToSymbol.Windows;
+
+    return upperKey in specialKeyMap ? specialKeyMap[upperKey] : upperKey;
+}
+
+export function getShortcutSymbols(keyString: string) {
+    return keyString.split('-').map(getKeySymbol).join('');
 }
 
 export { default as KeyMap } from 'const/keyMap';
