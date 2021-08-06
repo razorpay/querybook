@@ -86,7 +86,7 @@
         "react-table": "6.8.6",
         "react-virtualized": "9.22.3",
         "reactour": "^1.18.6",
-        "redux": "4.1.0",
+        "redux": "4.1.1",
         "redux-logger": "3.0.6",
         "redux-thunk": "2.3.0",
         "regenerator-runtime": "^0.13.7",
