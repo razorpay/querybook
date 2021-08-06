@@ -70,7 +70,7 @@
         "node-sass": "6.0.1",
         "normalizr": "3.3.0",
         "qs": "6.5.2",
-        "rc-time-picker": "3.6.4",
+        "rc-time-picker": "3.7.3",
         "re-resizable": "4.9.0",
         "react": "17.0.2",
         "react-chartjs-2": "3.0.4",
