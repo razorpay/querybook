@@ -3891,10 +3891,12 @@
   dependencies:
     "@types/unist" "*"
 
-"@types/memoize-one@3.1.1":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@types/memoize-one/-/memoize-one-3.1.1.tgz#0e21a1b91dc031fb59c1e1657b807ca9aec77475"
-  integrity sha512-VlMu4eWNfQ8CDfhHYe8P/RgBq8vgce8LMo4vVKASPPAv+TE9SCR1bH6pA4nHEKNUQz1L/PIdElU2vqA2m366Dw==
+"@types/memoize-one@5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@types/memoize-one/-/memoize-one-5.1.2.tgz#9bed4199822f6ae759b2a0de855f3254104709b5"
+  integrity sha512-9lItlM8Bf1DPvm8p4zE0vUn7YoTktEYgLd6Eva/PT0its200xmhaYrCMG/Y8615/f62SXOrDWMIEPk/xV+DQpw==
+  dependencies:
+    memoize-one "*"
 
 "@types/micromatch@^4.0.1":
   version "4.0.1"
@@ -12200,15 +12202,15 @@ memfs@^3.1.2, memfs@^3.2.2:
   dependencies:
     fs-monkey "1.0.3"
 
+memoize-one@*, memoize-one@^5.0.0:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.2.1.tgz#8337aa3c4335581839ec01c3d594090cebe8f00e"
+  integrity sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==
+
 memoize-one@5.0.2:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.0.2.tgz#6aba5276856d72fb44ead3efab86432f94ba203d"
   integrity sha512-o7lldN4fs/axqctc03NF+PMhd2veRrWeJ2n2GjEzUPBD4F9rmNg4A+bQCACIzwjHJEXuYv4aFFMaH35KZfHUrw==
-
-memoize-one@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.0.0.tgz#d55007dffefb8de7546659a1722a5d42e128286e"
-  integrity sha512-7g0+ejkOaI9w5x6LvQwmj68kUj6rxROywPSCqmclG/HBacmFnZqhVscQ8kovkn9FBCNJmOz6SY42+jnvZzDWdw==
 
 memoizerific@^1.11.3:
   version "1.11.3"
