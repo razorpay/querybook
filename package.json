@@ -120,7 +120,7 @@
         "@types/draft-js": "0.10.44",
         "@types/fast-json-stable-stringify": "2.0.0",
         "@types/feather-icons": "4.7.0",
-        "@types/jest": "^26.0.20",
+        "@types/jest": "^27.0.1",
         "@types/json-bigint": "^1.0.0",
         "@types/lodash": "4.14.116",
         "@types/markdown-to-jsx": "^6.11.3",
