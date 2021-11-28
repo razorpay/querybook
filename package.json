@@ -162,7 +162,7 @@
         "eslint-plugin-react": "^7.21.5",
         "jest": "26.6.3",
         "json-loader": "^0.5.7",
-        "postcss-loader": "^6.1.0",
+        "postcss-loader": "^6.2.1",
         "postcss-preset-env": "6.7.0",
         "prettier": "2.2.1",
         "prettier-eslint": "^11.0.0",
