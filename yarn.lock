@@ -9041,6 +9041,11 @@ fast-levenshtein@^2.0.6, fast-levenshtein@~2.0.4, fast-levenshtein@~2.0.6:
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
 
+fast-memoize@^2.5.1:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/fast-memoize/-/fast-memoize-2.5.2.tgz#79e3bb6a4ec867ea40ba0e7146816f6cdce9b57e"
+  integrity sha512-Ue0LwpDYErFbmNnZSF0UH6eImUwDmogUO1jyE+JbN2gsQz/jICm1Ve7t9QT0rNSsfJt+Hs4/S3GnsDVjL4HVrw==
+
 fastest-levenshtein@^1.0.12:
   version "1.0.12"
   resolved "https://registry.yarnpkg.com/fastest-levenshtein/-/fastest-levenshtein-1.0.12.tgz#9990f7d3a88cc5a9ffd1f1745745251700d497e2"
@@ -14597,10 +14602,12 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-re-resizable@4.9.0:
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-4.9.0.tgz#0160728b9d7e32371fb26562221678ae643e6557"
-  integrity sha512-AkTHHC/I1+MUnabFu3/9ADwR5A+HyjiL3xgqlcgNKdyJZVb851I7sGre/4JIU7XfhaN5t+xZBvJPOuvEdvSMcw==
+re-resizable@6.9.2:
+  version "6.9.2"
+  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-6.9.2.tgz#24f882260cb4ea1713cbc1e8c4d80e8e1ae1c202"
+  integrity sha512-+aJT81zg43JwPaqTANOpR2Scqo8Z4uTlwNASKmPVqRFposxxyeWPvegjyL4BYMX0GA3HqRI1c+eKD3rEJB01Lw==
+  dependencies:
+    fast-memoize "^2.5.1"
 
 react-chartjs-2@3.0.4:
   version "3.0.4"
