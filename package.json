@@ -122,7 +122,7 @@
         "@types/feather-icons": "4.7.0",
         "@types/jest": "^26.0.20",
         "@types/json-bigint": "^1.0.0",
-        "@types/lodash": "4.14.116",
+        "@types/lodash": "4.14.179",
         "@types/markdown-to-jsx": "^6.11.3",
         "@types/memoize-one": "3.1.1",
         "@types/qs": "^6.5.1",
