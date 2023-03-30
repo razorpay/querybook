@@ -16,7 +16,7 @@ jobs:
               run: |
                   echo STATE_RELEASE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') >> $GITHUB_ENV
             - name: Publish to Registry
-              uses: elgohr/Publish-Docker-Github-Action@master
+              uses: elgohr/Publish-Docker-Github-Action@v5
               with:
                   name: querybook/querybook
                   username: ${{ secrets.DOCKER_USERNAME }}
