@@ -11744,10 +11744,10 @@ kleur@^3.0.2, kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-klona@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.4.tgz#7bb1e3affb0cb8624547ef7e8f6708ea2e39dfc0"
-  integrity sha512-ZRbnvdg/NxqzC7L9Uyqzf4psi1OM4Cuc+sJAkQPjO6XkQIJTNbfK2Rsmbw8fx1p2mkZdp2FZYo2+LwXYY/uwIA==
+klona@^2.0.4, klona@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.6.tgz#85bffbf819c03b2f53270412420a4555ef882e22"
+  integrity sha512-dhG34DXATL5hSxJbIexCft8FChFXtmskoZYnoPWjXQuebWYCNkVeV3KkGegCK9CP1oswI/vQibS2GY7Em/sJJA==
 
 lazy-universal-dotenv@^3.0.1:
   version "3.0.1"
@@ -12648,12 +12648,7 @@ negotiator@0.6.2:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.2.tgz#feacf7ccf525a77ae9634436a64883ffeca346fb"
   integrity sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==
 
-neo-async@^2.5.0, neo-async@^2.6.1:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
-  integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
-
-neo-async@^2.6.2:
+neo-async@^2.5.0, neo-async@^2.6.1, neo-async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
@@ -15725,12 +15720,12 @@ sass-graph@2.2.5:
     scss-tokenizer "^0.2.3"
     yargs "^13.3.2"
 
-sass-loader@11.1.0:
-  version "11.1.0"
-  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-11.1.0.tgz#302a83e41834a7ac0cc9d7591e52688ef4ed92af"
-  integrity sha512-TS8KtLtMAqK68lBs0PRzoGf7ndz9m7pKo4BXvUzjGDDgWEY0qcoMMRVpaHfYM0i3/E6UsererqIpjs7dVA/p7A==
+sass-loader@13.3.1:
+  version "13.3.1"
+  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-13.3.1.tgz#32ee5791434b9b4dbd1adcce76fcb4cea49cc12c"
+  integrity sha512-cBTxmgyVA1nXPvIK4brjJMXOMJ2v2YrQEuHqLw3LylGb3gsR6jAvdjHMcy/+JGTmmIF9SauTrLLR7bsWDMWqgg==
   dependencies:
-    klona "^2.0.4"
+    klona "^2.0.6"
     neo-async "^2.6.2"
 
 sax@^1.2.4:
