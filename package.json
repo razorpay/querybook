@@ -109,7 +109,7 @@
         "@pmmmwh/react-refresh-webpack-plugin": "0.5.0-rc.2",
         "@storybook/addon-centered": "^5.3.21",
         "@storybook/addon-essentials": "^6.3.1",
-        "@storybook/addon-links": "^6.3.1",
+        "@storybook/addon-links": "^7.1.0",
         "@storybook/addons": "^6.3.1",
         "@storybook/builder-webpack5": "^6.3.1",
         "@storybook/manager-webpack5": "^6.3.1",
