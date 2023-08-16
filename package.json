@@ -111,7 +111,7 @@
         "@storybook/addon-essentials": "^6.3.1",
         "@storybook/addon-links": "^6.3.1",
         "@storybook/addons": "^6.3.1",
-        "@storybook/builder-webpack5": "^6.3.1",
+        "@storybook/builder-webpack5": "^7.3.0",
         "@storybook/manager-webpack5": "^6.3.1",
         "@storybook/react": "^6.3.1",
         "@types/codemirror": "^0.0.76",
