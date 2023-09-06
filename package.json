@@ -54,7 +54,7 @@
         "draft-js-import-html": "^1.4.1",
         "fast-json-stable-stringify": "2.0.0",
         "feather-icons": "4.28.0",
-        "formik": "2.2.6",
+        "formik": "2.4.4",
         "history": "^4.10.1",
         "html-webpack-plugin": "5.3.1",
         "immer": "8.0.1",
