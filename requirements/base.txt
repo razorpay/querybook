@@ -1,6 +1,6 @@
 
 # Server
-Werkzeug==0.15.5
+Werkzeug==2.2.3
 flask==1.1.2
 Flask-Caching==1.7.2
 Flask-Compress==1.4.0
