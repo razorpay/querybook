@@ -91,7 +91,7 @@
         "redux-thunk": "2.3.0",
         "regenerator-runtime": "^0.13.7",
         "reselect": "4.0.0",
-        "smooth-scroll-into-view-if-needed": "^1.1.27",
+        "smooth-scroll-into-view-if-needed": "^2.0.2",
         "socket.io-client": "3.1.2",
         "sql-formatter": "2.3.3",
         "styled-components": "5.2.1",
