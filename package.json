@@ -137,7 +137,7 @@
         "@types/react-virtualized": "9.21.12",
         "@types/reactour": "^1.18.2",
         "@types/redux-logger": "3.0.6",
-        "@types/resize-observer-browser": "^0.1.4",
+        "@types/resize-observer-browser": "^0.1.7",
         "@types/styled-components": "5.1.4",
         "@types/webpack": "5.28.0",
         "@types/webpack-env": "1.16.0",
